@@ -1,0 +1,19 @@
+Inorder to log in to Click-Up your username and password must be
+stored on your computer. The program needs to access this
+information.(This is the whole point of this program.) Therefore
+anyone with access to your computer and knowledge of this program can
+get your Click-Up password and username. 
+Therefore, please make sure that your Click-Up password is not the
+same as your other passwords. I do not accept any resposibility for
+keeping your credentials secure.
+
+However, what I want to do is lessen your stress, not increase it. So
+what I suggest is the following:
+    During the exam period, change your password. I don't think
+    someone could do much damage during this time (most assignments
+    should be in by this time).
+	Make sure your Click-Up password matches your gmail
+	(u'sutdentnumber'@tuks.co.za) password. Update the credentials for
+	this app. After all your marks are out change your Click-Up (and/or
+	gmail) password. And (perminently) delete the "tmp/.credentials.csv"
+	file.

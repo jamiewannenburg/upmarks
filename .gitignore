@@ -1,0 +1,6 @@
+/tmp
+.pyc
+/dist
+/build
+/test_environment
+marks.txt
