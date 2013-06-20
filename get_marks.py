@@ -73,9 +73,9 @@ try:
         with open('marks.txt','w') as file:
             file.write(big_string)
 
-##        # open
-##        import webbrowser
-##        webbrowser.open("marks.txt")
+        # open
+        import webbrowser
+        webbrowser.open("marks.txt")
         
         # Email
         iofunctions.build_and_send_email(my_credentials,big_string)
