@@ -17,16 +17,6 @@ import iofunctions
 # post data
 
 import urllib
-params = {"timezoneOffset" : "0",
-          "userid" : 'U'+my_credentials.username,
-          'pwd' : my_credentials.password}
-# params['ICAction'] = 'UP_DERIVED_SSR_SS_ENRL_APP_LINK'
-# params['ICType'] = 'Panel'
-# params['ICAJAX'] = '1'
-# params['ICNAVTYPEDROPDOWN'] = '1'
-# params['ICStateNum'] = str(0)
-# params['ICChanged'] = '0'
-data = urllib.urlencode(params)
 
 # Fetch data
 from bs4 import BeautifulSoup
@@ -42,7 +32,7 @@ try:
     c.setopt(pycurl.WRITEDATA, f)
     c.setopt(pycurl.SSLVERSION, 3)
     c.setopt(pycurl.SSL_VERIFYPEER, True)
-    c.setopt(pycurl.SSL_VERIFYHOST, 1)
+    #c.setopt(pycurl.SSL_VERIFYHOST, 1)
     #c.setopt(c.VERBOSE, True)
     c.setopt(pycurl.CAINFO, "assets/cacert.pem")
     c.setopt(pycurl.COOKIEFILE, "tmp/cookies.txt")
@@ -84,7 +74,7 @@ try:
         c.setopt(pycurl.WRITEDATA, f)
         c.setopt(pycurl.SSLVERSION, 3)
         c.setopt(pycurl.SSL_VERIFYPEER, True)
-        c.setopt(pycurl.SSL_VERIFYHOST, 1)
+        # c.setopt(pycurl.SSL_VERIFYHOST, 1)
         #c.setopt(c.VERBOSE, True)
         c.setopt(pycurl.CAINFO, "assets/cacert.pem")
         c.setopt(pycurl.COOKIEFILE, "tmp/cookies.txt")
@@ -98,7 +88,7 @@ try:
         params['username'] = my_credentials.username # javascript does this
 
         data = urllib.urlencode(params)
-        print data
+        # print data
 
         header = ['Content-type: application/x-www-form-urlencoded',
                     'Origin: https://www1.up.ac.za'
@@ -110,7 +100,7 @@ try:
         c.setopt(pycurl.WRITEDATA, f)
         c.setopt(pycurl.SSLVERSION, 3)
         c.setopt(pycurl.SSL_VERIFYPEER, True)
-        c.setopt(pycurl.SSL_VERIFYHOST, 1)
+        # c.setopt(pycurl.SSL_VERIFYHOST, 1)
         # c.setopt(c.VERBOSE, True)
         c.setopt(pycurl.CAINFO, "assets/cacert.pem")
         c.setopt(pycurl.COOKIEFILE, "tmp/cookies.txt")
@@ -146,7 +136,7 @@ try:
     c.setopt(pycurl.WRITEDATA, f)
     c.setopt(pycurl.SSLVERSION, 3)
     c.setopt(pycurl.SSL_VERIFYPEER, True)
-    c.setopt(pycurl.SSL_VERIFYHOST, 1)
+    # c.setopt(pycurl.SSL_VERIFYHOST, 1)
     # c.setopt(c.VERBOSE, True)
     c.setopt(pycurl.CAINFO, "assets/cacert.pem")
     c.setopt(pycurl.COOKIEFILE, "tmp/cookies.txt")
@@ -176,7 +166,7 @@ try:
     c.setopt(pycurl.WRITEDATA, f)
     c.setopt(pycurl.SSLVERSION, 3)
     c.setopt(pycurl.SSL_VERIFYPEER, True)
-    c.setopt(pycurl.SSL_VERIFYHOST, 1)
+    # c.setopt(pycurl.SSL_VERIFYHOST, 1)
     # c.setopt(c.VERBOSE, True)
     c.setopt(pycurl.CAINFO, "assets/cacert.pem")
     c.setopt(pycurl.COOKIEFILE, "tmp/cookies.txt")
@@ -198,7 +188,7 @@ try:
     c.setopt(pycurl.WRITEDATA, f)
     c.setopt(pycurl.SSLVERSION, 3)
     c.setopt(pycurl.SSL_VERIFYPEER, True)
-    c.setopt(pycurl.SSL_VERIFYHOST, 1)
+    # c.setopt(pycurl.SSL_VERIFYHOST, 1)
     # c.setopt(c.VERBOSE, True)
     c.setopt(pycurl.CAINFO, "assets/cacert.pem")
     c.setopt(pycurl.COOKIEFILE, "tmp/cookies.txt")
@@ -219,7 +209,7 @@ try:
     c.setopt(pycurl.WRITEDATA, f)
     c.setopt(pycurl.SSLVERSION, 3)
     c.setopt(pycurl.SSL_VERIFYPEER, True)
-    c.setopt(pycurl.SSL_VERIFYHOST, 1)
+    # c.setopt(pycurl.SSL_VERIFYHOST, 1)
     # c.setopt(c.VERBOSE, True)
     c.setopt(pycurl.CAINFO, "assets/cacert.pem")
     c.setopt(pycurl.COOKIEFILE, "tmp/cookies.txt")
@@ -252,7 +242,7 @@ try:
     f = open('tmp/StudentCentre.html','w')
     c = pycurl.Curl()
     c.setopt(pycurl.WRITEDATA, f)
-    c.setopt(c.VERBOSE, True)
+    # c.setopt(c.VERBOSE, True)
     c.setopt(pycurl.COOKIEFILE, "tmp/cookies.txt")
     c.setopt(pycurl.COOKIEJAR, "tmp/cookies.txt")
     c.setopt(pycurl.FOLLOWLOCATION, 1)
