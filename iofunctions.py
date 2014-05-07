@@ -74,5 +74,8 @@ def marks_changed(names,descriptions,grades,root=""):
     except IOError:
         print "marks.txt does not exist/\n"
         changed = True
+    except ValueError:
+        print "subjects have changed\n"
+        changed = True
     return changed
         

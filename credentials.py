@@ -9,8 +9,10 @@ class credentials:
     def __init__(self,root=""):
         if root == "":
             self.dir = "tmp"
+            self.root=""
         else:
             self.dir = root + "/tmp"
+            self.root = root + "/"
         
         self.filename = self.dir + "/.credentials"
         self.username = ""
@@ -28,7 +30,7 @@ class credentials:
         not: ask user for username and password. Encrypt password.
         Save these credentials in file (with write permitions). """
         # print disclaimer
-        with open("text/disclaimer.txt","r") as f:
+        with open(self.root+"text/disclaimer.txt","r") as f:
             print f.read()
             
         # get user credentials
