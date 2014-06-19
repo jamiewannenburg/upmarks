@@ -63,7 +63,7 @@ try:
         params['username'] = 'U'+my_credentials.username # javascript does this
 
         js = soup.find('head').find('script')
-        request_id = eval(re.findall('request_id = [0-9+-]*;',str(js))[0][13:-1])
+        request_id = eval(re.findall('request_id = [0-9+\- ]*;',str(js))[0][13:-1])
         usernamelookup = "https://www1.up.ac.za:443/uplogin/usernamelookup?request_id="+str(request_id)+"&username="+params['userid_test']
 
         header = ['User-Agent: XMLHTTP/1.0']
