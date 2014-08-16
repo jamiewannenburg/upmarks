@@ -5,7 +5,7 @@ Checks your marks at University of Pretoria and e-mails you and opens notepad wh
 
 If you are like me you can't relax until you know all our marks. The fact that Click-Up logs you out every ten minutes is very annoying in this regard. So this program automates the process and notifies you when something changes.
 
-To download the latest version go to the folder "binaries/windows" and download the latest .zip file by clicking view raw. Or clicking https://raw.github.com/jamiewannenburg/upmarks/master/binaries/windows/UPMarks_v0-004.zip . Extract to a folder of your choice. Then run "get_marks.exe". An e-mail wil be sent to your student number gmail address. And notepad wil open; displaying your marks. 
+To download the latest version go to http://www.jamiewannenburg.com/binaries and look for the latest version called `UPMarks_[version].zip`. Extract to a folder of your choice. Then run "get_marks.exe". An e-mail wil be sent to your student number gmail address. And notepad wil open; displaying your marks. 
 
 You can automate the process. First run the program "get_marks", so that the program can get your credentials. 
 
