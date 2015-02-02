@@ -1,6 +1,6 @@
 # change directory
 import os
-root = "C:/Users/Vincent/Programming/UPMarks"
+root = os.path.dirname(os.path.realpath(__file__))
 os.chdir(root)
 
 import time
@@ -32,7 +32,7 @@ try:
     c.setopt(pycurl.WRITEDATA, f)
     c.setopt(pycurl.SSLVERSION, 3)
     c.setopt(pycurl.SSL_VERIFYPEER, True)
-    #c.setopt(pycurl.SSL_VERIFYHOST, 1)
+    c.setopt(pycurl.SSL_VERIFYHOST, 2)
     #c.setopt(c.VERBOSE, True)
     c.setopt(pycurl.CAINFO, "assets/cacert.pem")
     c.setopt(pycurl.COOKIEFILE, "tmp/cookies.txt")
@@ -42,13 +42,15 @@ try:
     c.setopt(pycurl.URL, "https://www1.up.ac.za/uplogin/faces/login.jspx?")
     c.perform()
     f.close()
-
+    referer =  c.getinfo(c.EFFECTIVE_URL)
+    c.close()
     soup = BeautifulSoup(open('tmp/StudentCentre.html','rb'))
+    #print soup.find('script')
 
     ##### check if I am still logged in
     if (str(soup.find('title')) == "<title>UP Login</title>" ):
 
-        referer =  c.getinfo(c.EFFECTIVE_URL)
+        
 
         #### do "javascript" validation and send request
         
@@ -61,8 +63,9 @@ try:
         for i in soup.find_all("input",type = "hidden"):
             params[i['name']] = i['value']
         params['username'] = 'U'+my_credentials.username # javascript does this
-
+        #print soup.find('head')
         js = soup.find('head').find('script')
+        
         request_id = eval(re.findall('request_id = [0-9+\- ]*;',str(js))[0][13:-1])
         usernamelookup = "https://www1.up.ac.za:443/uplogin/usernamelookup?request_id="+str(request_id)+"&username="+params['userid_test']
 
@@ -74,7 +77,7 @@ try:
         c.setopt(pycurl.WRITEDATA, f)
         c.setopt(pycurl.SSLVERSION, 3)
         c.setopt(pycurl.SSL_VERIFYPEER, True)
-        # c.setopt(pycurl.SSL_VERIFYHOST, 1)
+        c.setopt(pycurl.SSL_VERIFYHOST, 2)
         #c.setopt(c.VERBOSE, True)
         c.setopt(pycurl.CAINFO, "assets/cacert.pem")
         c.setopt(pycurl.COOKIEFILE, "tmp/cookies.txt")
@@ -88,7 +91,6 @@ try:
         params['username'] = my_credentials.username # javascript does this
 
         data = urllib.urlencode(params)
-        # print data
 
         header = ['Content-type: application/x-www-form-urlencoded',
                     'Origin: https://www1.up.ac.za'
@@ -100,7 +102,7 @@ try:
         c.setopt(pycurl.WRITEDATA, f)
         c.setopt(pycurl.SSLVERSION, 3)
         c.setopt(pycurl.SSL_VERIFYPEER, True)
-        # c.setopt(pycurl.SSL_VERIFYHOST, 1)
+        c.setopt(pycurl.SSL_VERIFYHOST, 2)
         # c.setopt(c.VERBOSE, True)
         c.setopt(pycurl.CAINFO, "assets/cacert.pem")
         c.setopt(pycurl.COOKIEFILE, "tmp/cookies.txt")
@@ -119,9 +121,8 @@ try:
     ### I am now logged in, but need to change query from javascript
     ###### first javascript redirect
     js = str(soup.find('script'))
-
     # get afrLoop var
-    afrLoop = re.findall('"_afrLoop=\S*";',js)[0][10:-2]
+    afrLoop = re.findall('"_afrLoop", "\S*"',js)[0][13:-1]
     data = '_afrLoop=' + afrLoop
     data += '&_afrWindowMode=' + '0'
     data += '&_afrWindowId=' + '10e6wa3xcl_6'
@@ -136,7 +137,7 @@ try:
     c.setopt(pycurl.WRITEDATA, f)
     c.setopt(pycurl.SSLVERSION, 3)
     c.setopt(pycurl.SSL_VERIFYPEER, True)
-    # c.setopt(pycurl.SSL_VERIFYHOST, 1)
+    c.setopt(pycurl.SSL_VERIFYHOST, 2)
     # c.setopt(c.VERBOSE, True)
     c.setopt(pycurl.CAINFO, "assets/cacert.pem")
     c.setopt(pycurl.COOKIEFILE, "tmp/cookies.txt")
@@ -148,25 +149,27 @@ try:
     f.close()
 
     ###### second javascript redirect
-    soup = BeautifulSoup(open('tmp/StudentCentre.html','rb'))
+    f = open('tmp/StudentCentre.html','rb')
+    soup = BeautifulSoup(f)
     ### I am now logged in, but need to change query from javascript
     js = str(soup.find('script'))
 
     # get afrLoop var
-    afrLoop = re.findall('"_afrLoop=\S*";',js)[0][10:-2]
+    afrLoop = re.findall('"_afrLoop", "\S*"',js)[0][13:-1]
     data = '_afrLoop=' + afrLoop
     data += '&_afrWindowMode=' + '0'
     data += '&_afrWindowId=' + '10e6wa3xcl_6'
 
     url = "https://www1.up.ac.za/wcportal/faces/student.jspx?"+data
     # print url
+    f.close()
 
     f = open('tmp/StudentCentre.html','w')
     c = pycurl.Curl()
     c.setopt(pycurl.WRITEDATA, f)
     c.setopt(pycurl.SSLVERSION, 3)
     c.setopt(pycurl.SSL_VERIFYPEER, True)
-    # c.setopt(pycurl.SSL_VERIFYHOST, 1)
+    c.setopt(pycurl.SSL_VERIFYHOST, 2)
     # c.setopt(c.VERBOSE, True)
     c.setopt(pycurl.CAINFO, "assets/cacert.pem")
     c.setopt(pycurl.COOKIEFILE, "tmp/cookies.txt")
@@ -188,7 +191,7 @@ try:
     c.setopt(pycurl.WRITEDATA, f)
     c.setopt(pycurl.SSLVERSION, 3)
     c.setopt(pycurl.SSL_VERIFYPEER, True)
-    # c.setopt(pycurl.SSL_VERIFYHOST, 1)
+    c.setopt(pycurl.SSL_VERIFYHOST, 2)
     # c.setopt(c.VERBOSE, True)
     c.setopt(pycurl.CAINFO, "assets/cacert.pem")
     c.setopt(pycurl.COOKIEFILE, "tmp/cookies.txt")
@@ -209,7 +212,7 @@ try:
     c.setopt(pycurl.WRITEDATA, f)
     c.setopt(pycurl.SSLVERSION, 3)
     c.setopt(pycurl.SSL_VERIFYPEER, True)
-    # c.setopt(pycurl.SSL_VERIFYHOST, 1)
+    c.setopt(pycurl.SSL_VERIFYHOST, 2)
     # c.setopt(c.VERBOSE, True)
     c.setopt(pycurl.CAINFO, "assets/cacert.pem")
     c.setopt(pycurl.COOKIEFILE, "tmp/cookies.txt")
@@ -269,23 +272,18 @@ try:
 
     names = []
     for a in soup.find_all("a",id = re.compile("CLASS_NAME")):
-        names.append(a.string)
+        names.append(unicode(a.string))
 
     descriptions = []
     for div in soup.find_all("div",id = re.compile("DERIVED_SSS_SCL_UP_GRANTOR_DESCR")):
-        descriptions.append(div.span.string)
+        descriptions.append(unicode(div.span.string))
 
     grades = []
     for div in soup.find_all("div",id = re.compile("DERIVED_SSS_SCL_UP_GRADE")):
-        try:
-            div.span.string.encode('ascii')
-            grades.append(div.span.string)
-        except UnicodeEncodeError:
-            grades.append('')
+        grades.append(unicode(div.span.string))
 
 
     # check whether grades have changed
-    
     if iofunctions.marks_changed(names,descriptions,grades):
         # make tab sepperated values strings
         big_string = ''
@@ -296,7 +294,7 @@ try:
 
         # save
         with open(root+'/marks.txt','w') as file:
-            file.write(big_string)
+            file.write(big_string.encode("UTF-8"))
 
         # open
         import webbrowser

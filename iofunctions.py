@@ -39,7 +39,7 @@ def build_and_send_email(c,marks):
     msg['From'] = c.email
     msg['To'] = c.email
     text = 'Nuwe Punte is uit!\n'+marks
-    part1 = MIMEText(text, 'plain')
+    part1 = MIMEText(text.encode("UTF-8"), 'plain')
     msg.attach(part1)
     server = smtplib.SMTP('smtp.gmail.com:587')  
     server.starttls()  
@@ -60,14 +60,16 @@ def marks_changed(names,descriptions,grades,root=""):
     try:
         with open(filename) as file:
             for i, name in enumerate(names):
-                old_name,old_description,old_grade = file.readline().split('\t')
-                    
+                line = file.readline().decode('UTF-8')
+                old_name,old_description,old_grade = line.split('\t')
                 if old_name != name:
                     print old_name + ' changed to ' + name + '\n'
                     changed = True
                 elif old_description != descriptions[i]:
                     print old_description + ' changed to ' + descriptions[i] + '\n'
                     changed = True
+                elif grades[i]==old_grade:
+                    changed = False
                 elif old_grade[:-1] != grades[i]:
                     print old_grade[:-1] + ' changed to ' + grades[i] + '\n'
                     changed = True
